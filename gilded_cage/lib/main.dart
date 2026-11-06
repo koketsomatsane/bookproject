@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gilded_cage/screens/admin_login_screen.dart';
+import 'package:gilded_cage/screens/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,73 +11,64 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: "Gilded Cage", home: HomeScreen());
+    return MaterialApp(title: "Gilded Cage", home: WelcomeScreen());
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: Text("The Gilded Cage"),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Welcome Readers!",
-              style: TextStyle(
-                color: Colors.black,
-                fontStyle: FontStyle.italic,
-                fontSize: 25,
-              ),
+          children: [       
+            const Text(
+              'Gilded Cage',
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 40),
 
-            const SizedBox(height: 15),
-
-            Text(
-              "Curated By KM!",
-              style: TextStyle(
-                color: Colors.black,
-                fontStyle: FontStyle.italic,
-                fontSize: 30,
-              ),
-            ),
-
-            const SizedBox(height: 15),
-
-            Icon(Icons.book_rounded, size: 60),
-
-            const SizedBox(height: 20),
-
+            // Start Reading Button
             ElevatedButton(
               onPressed: () {
-                print("Button clicked!");
+                // Navigates to the HomeScreen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterScreen(),
+                  ),
+                );
               },
-              child: Text("Start Reading"),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 15,
+                ),
+              ),
+              child: const Text(
+                'Start Reading',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            const SizedBox(height: 14),
+            TextButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AdminLoginScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.edit_note_rounded),
+              label: const Text('Author workspace'),
             ),
           ],
         ),
       ),
     );
-  }
-}
-
-class ReadingScreen extends StatefulWidget {
-  const ReadingScreen({super.key});
-
-  @override
-  State<ReadingScreen> createState() => _ReadingScreenState();
-}
-
-class _ReadingScreenState extends State<ReadingScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
